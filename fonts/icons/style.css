@@ -1,0 +1,68 @@
+@font-face {
+	font-family: 'icons';
+	src:url('fonts/icons.eot');
+	src:url('fonts/icons.eot?#iefix') format('embedded-opentype'),
+		url('fonts/icons.woff') format('woff'),
+		url('fonts/icons.ttf') format('truetype'),
+		url('fonts/icons.svg#icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'icons';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"]:before {
+*/
+.icon-arrow-right:before, .icon-arrow-left:before, .icon-expand:before, .icon-contract:before, .icon-arrow-left-2:before, .icon-arrow-right-2:before, .icon-play:before, .icon-pause:before, .icon-stop:before, .icon-forward:before, .icon-backward:before {
+	font-family: 'icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-arrow-right:before {
+	content: "\72";
+}
+.icon-arrow-left:before {
+	content: "\6c";
+}
+.icon-expand:before {
+	content: "\65";
+}
+.icon-contract:before {
+	content: "\63";
+}
+.icon-arrow-left-2:before {
+	content: "\62";
+}
+.icon-arrow-right-2:before {
+	content: "\66";
+}
+.icon-play:before {
+	content: "\70";
+}
+.icon-pause:before {
+	content: "\68";
+}
+.icon-stop:before {
+	content: "\73";
+}
+.icon-forward:before {
+	content: "\71";
+}
+.icon-backward:before {
+	content: "\7a";
+}

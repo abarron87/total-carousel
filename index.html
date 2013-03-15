@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset=utf-8/>
+        <meta name=description content=""/>
+        <meta name=viewport content="width=device-width, initial-scale=1"/>
+        <title>Carousel</title>
+        <!-- Include the bootstrap stylesheets -->
+    	<!-- <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"> -->
+    	<link rel="stylesheet" href="http://yui.yahooapis.com/2.9.0/build/reset/reset-min.css"/>
+        <link rel="stylesheet" href="css/animate.css"/>
+        <link rel="stylesheet" href="fonts/icons/style.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
+    </head>
+    <body>
+<!--         <span class="icon-arrow-left-2"></span>
+        <h1>Gallery</h1> -->
+        <section id="waterfallsGallery" class="gallery">
+            <!-- <div class="shroud"></div> -->
+        	<ol class="large invisible">
+        		<li class="slide video">
+                    <div class="image">
+                        <img src="http://www.cliftonhill.com/sites/default/files/imagecache/primary/page/primary-images/niagara-falls.jpg"/>
+                    </div>
+                    <div class="metadata hide">
+                        <label>Niagara Falls</label>
+                        <div class="json hide">
+                            {
+                                "largeImage":"http://www.cliftonhill.com/sites/default/files/imagecache/primary/page/primary-images/niagara-falls.jpg"
+                            }
+                        </div>
+                    </div>
+        		</li>
+        		<li class="slide">
+                    <div class="image">
+                        <img src="http://3.bp.blogspot.com/-l1BOz-7WXus/UPuM6Rt2tCI/AAAAAAAACsU/EJs4C-f5fo8/s1600/Angel+Falls+02.jpg"/>
+                    </div>
+                    <div class="metadata hide">
+                        <label>Angel Falls</label>
+                        <p>This is the tallest waterfall in the world</p>
+                    </div>
+        		</li>
+        		<li class="slide">
+                    <div class="image">
+                        <img src="http://www.sprayview-hotel.com/images/victoria%20falls.jpg"/>
+                    </div>
+                    <div class="metadata hide">
+                        <label>Victoria Falls</label>
+                        <div class="json hide">
+                            {
+                                "largeImage":"http://www.sprayview-hotel.com/images/victoria%20falls.jpg"
+                            }
+                        </div>
+                    </div>
+        		</li>
+        		<li class="slide">
+                    <div class="metadata hide">
+                        <label>Thunder Creek Falls</label>
+                    </div>
+        			<!-- <img src="http://www.backpack-newzealand.com/nz-photos/data/22/medium/thunder_creek_falls_2.jpg"/> -->
+        		</li>
+        		<li class="slide">
+                    <div class="image">
+                        <img src="http://files.maravilhas-naturais.webnode.pt/200000128-b22f0b3291/YosemiteFalls.jpg"/>
+                    </div>
+                    <div class="metadata hide">
+                        <label>Yosemite Falls</label>
+                    </div>
+        		</li>
+        	</ol>
+            <div id="fullScreen" class="overlay"></div>
+            <!-- <div class="shroud"></div> -->
+        </section>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script src="js/carousel.js"></script>
+        <script>
+            //Need images to have loaded.
+            jQuery(window).load(function(){
+                jQuery("#waterfallsGallery").carousel();
+            });
+        </script>
+    </body>
+</html>
