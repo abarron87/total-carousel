@@ -1,0 +1,194 @@
+.hide { display:none; }
+.invisible { visibility: hidden; }
+
+.gallery {
+	position: relative;
+	overflow: hidden;
+	/*background: url(../images/black_lozenge.png) repeat 0 0;*/
+	background-color: #000000;
+
+	border-top: 2px solid rgb(214,11,4);
+	border-bottom: 2px solid rgb(214,11,4);
+	/*height: 300px;*/
+	/*box-shadow: inset 0 0 50px #000000;*/
+}
+
+	.gallery ol {
+		position: absolute;
+		height: 100%;
+		/*width: 2200px;*/
+		/*margin-left: -1100px;*/
+		top: 0;
+		left: 50%;
+	}
+
+		.gallery ol li {
+			position: absolute;
+			margin: 0px 20px;
+			height: 100%;
+			cursor: pointer;
+		}
+
+			.gallery ol li .image {
+				/* To vertically centre image. */
+				position: relative;
+				/*top: 50%;*/
+			}
+				.gallery ol li .image .expand {
+					font-size: 20px;
+					padding: 8px;
+					background-color: rgba(0,0,0,0.5);
+					height: 20px;
+					cursor: pointer;
+				}
+
+				.gallery ol li .image img {
+					/*width: 400px;*/
+				}
+
+			.gallery ol li.video .play {
+				display: block;
+				top: 50%;
+				margin-top: -35px;
+				width: 100%;
+
+				font-size: 70px;
+				text-shadow: 2px 2px 30px #000000;
+				text-align: center;
+
+				color: #eeeeee;
+			}
+
+			.gallery ol li.video .play:hover {
+				color: #ffffff;
+			}
+
+			.gallery ol li span {
+				position: absolute;
+				z-index: 10;
+
+				color: #ffffff;
+			}
+
+			.gallery ol li .metadata {
+				position: absolute;
+				/*z-index: 11;*/
+				bottom: 0;
+				width: 100%;
+				color: white;
+				background-color: rgba(255,0,0,0.5);
+				height: 50px;
+			}
+
+	.gallery .nav {
+		/* Centre it */
+		height: 40px;
+		position: absolute;
+		top: 50%;
+		margin: -20px 10px 0;
+		cursor: pointer;
+		z-index: 20;
+	}
+
+		.gallery .nav a {
+			color: #ffffff;
+			font-size: 40px;
+			text-decoration: none;
+			opacity: 0.0;
+			text-shadow: 2px 2px 30px #000000;
+		}
+
+		.gallery .nav a:hover {
+			opacity: 1.0;
+		}
+
+		.gallery .nav a.disabled:hover { }
+
+	.gallery .nav.next {
+		right: 0;
+	}
+
+/* FULL SCREEN MEDIA */
+#fullScreen {
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	text-align: center; /* centres it horizontally */
+
+	background: rgba(0,0,0,0.8);
+}
+
+/* create pseudo-element to display contwtfent container centrally */
+#fullScreen:before, .slide::before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+	
+	#fullScreen .image, .slide .image {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	#fullScreen .image {
+		width: 50%;
+	}
+
+/*
+	LOADING ANIMATION - http://www.alessioatzeni.com/blog/css3-loading-animation-loop/	
+*/
+.loading {
+	position: absolute;
+	width: 110px;
+
+	top: 50%;
+	left: 50%;
+	margin: -7.5px auto 0 -55px;
+}
+
+.barlittle {
+	background-color: rgb(214,11,4);  
+	background-image: -moz-linear-gradient(45deg, rgb(214,11,4) 25%, rgb(255,255,255)); 
+	background-image: -webkit-linear-gradient(45deg, rgb(214,11,4) 25%, rgb(255,255,255));
+	border-left:1px solid #111; border-top:1px solid #111; border-right:1px solid #333; border-bottom:1px solid #333; 
+	width:15px;
+	height:15px;
+	float:left;
+	margin-left:5px;
+    opacity:0.1;
+	-moz-transform:scale(0.7);
+	-webkit-transform:scale(0.7);
+	-moz-animation:move 1s infinite linear;
+	-webkit-animation:move 1s infinite linear;
+}
+#block_1{
+ 	-moz-animation-delay: .4s;
+	-webkit-animation-delay: .4s;
+ }
+#block_2{
+ 	-moz-animation-delay: .3s;
+	-webkit-animation-delay: .3s;
+}
+#block_3{
+ 	-moz-animation-delay: .2s;
+	-webkit-animation-delay: .2s;
+}
+#block_4{
+ 	-moz-animation-delay: .3s;
+	-webkit-animation-delay: .3s;
+}
+#block_5{
+ 	-moz-animation-delay: .4s;
+	-webkit-animation-delay: .4s;
+}
+@-moz-keyframes move{
+	0%{-moz-transform: scale(1.2);opacity:1;}
+	100%{-moz-transform: scale(0.7);opacity:0.1;}
+}
+@-webkit-keyframes move{
+	0%{-webkit-transform: scale(1.2);opacity:1;}
+	100%{-webkit-transform: scale(0.7);opacity:0.1;}
+}
