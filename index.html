@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Total-carousel by abarron87</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/abarron87/total-carousel">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/abarron87/total-carousel/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/abarron87/total-carousel/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Total-carousel</h1>
+          <p></p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/abarron87">abarron87</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>TotalCarousel</h1>
+
+<p>A jQuery plugin to create a full width sliding carousel. It supports static content such as images as well videos loaded from YouTube (you'll have to provide your Google API key for this service).</p>
+
+<h2>Quick Start</h2>
+
+<p>An example of a simple image carousel.</p>
+
+<h3>Requirements</h3>
+
+<p>Scripts:</p>
+
+<ul>
+<li>jQuery-1.9.js - <a href="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js">Google API link</a>
+</li>
+<li>totalCarousel.js - <a href="https://github.com/abarron87/total-carousel/blob/master/app/public/js/totalCarousel.js">GitHub Link</a>
+</li>
+</ul><p>Stylesheets:</p>
+
+<ul>
+<li>Yahoo Reset CSS - <a href="http://yui.yahooapis.com/2.9.0/build/reset/reset-min.css">Yahoo CSS Link</a>
+</li>
+<li>Animate.css - <a href="http://daneden.me/animate/">Website Link</a>
+</li>
+<li>Main CSS - <a href="https://github.com/abarron87/total-carousel/blob/master/app/public/css/style.css">GitHub Link</a>
+</li>
+</ul><h3>Setup</h3>
+
+<div class="highlight"><pre><span class="c">&lt;!-- HTML page start --&gt;</span>
+
+<span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"myCarousel"</span> <span class="na">class=</span><span class="s">"gallery"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"loading"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"block_1"</span> <span class="na">class=</span><span class="s">"barlittle"</span><span class="nt">&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"block_2"</span> <span class="na">class=</span><span class="s">"barlittle"</span><span class="nt">&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"block_3"</span> <span class="na">class=</span><span class="s">"barlittle"</span><span class="nt">&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"block_4"</span> <span class="na">class=</span><span class="s">"barlittle"</span><span class="nt">&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"block_5"</span> <span class="na">class=</span><span class="s">"barlittle"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"slideConfig"</span><span class="nt">&gt;</span>
+        {
+            "images": [
+                {
+                    "src": "path/to/image.extension"
+                },
+                {
+                    "src": "path/to/image.extension"
+                },
+                {
+                    "src": "path/to/image.extension"
+                },
+                {
+                    "src": "path/to/image.extension"
+                },
+                {
+                    "src": "path/to/image.extension"
+                }
+            ]
+        }
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"fullScreen"</span> <span class="na">class=</span><span class="s">"overlay hide"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"image"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    <span class="c1">//Need images to have loaded.</span>
+    <span class="nx">jQuery</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">jQuery</span><span class="p">(</span><span class="s2">"#myCarousel"</span><span class="p">).</span><span class="nx">totalCarousel</span><span class="p">({</span>
+            <span class="nx">dynamic</span><span class="o">:</span> <span class="kc">false</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- End of HTML --&gt;</span>
+</pre></div>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
