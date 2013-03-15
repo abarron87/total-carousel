@@ -1,0 +1,63 @@
+extends layout
+
+block content
+	//- section#waterfallsGallery.gallery
+	//- 	ol.large.invisible
+	//- 		li.slide.video
+	//- 			.image
+	//- 				img(src='http://i.telegraph.co.uk/multimedia/archive/02104/Thierry_Henry_2104643b.jpg')
+	//- 			.metadata.hide
+	//- 				label Thierry Henry
+	//- 				.json.hide
+	//- 					| {
+	//- 					| "largeImage":"http://i.telegraph.co.uk/multimedia/archive/02104/Thierry_Henry_2104643b.jpg"
+	//- 					| }
+	//- 		li.slide
+	//- 			.image
+	//- 				img(src='http://3.bp.blogspot.com/-l1BOz-7WXus/UPuM6Rt2tCI/AAAAAAAACsU/EJs4C-f5fo8/s1600/Angel+Falls+02.jpg')
+	//- 			.metadata.hide
+	//- 				label Angel Falls
+	//- 				p This is the tallest waterfall in the world
+	//- 		li.slide
+	//- 			.image
+	//- 				img(src='http://www.sprayview-hotel.com/images/victoria%20falls.jpg')
+	//- 			.metadata.hide
+	//- 				label Victoria Falls
+	//- 				.json.hide
+	//- 					| {
+	//- 					| "largeImage":"http://www.sprayview-hotel.com/images/victoria%20falls.jpg"
+	//- 					| }
+	//- 		li.slide
+	//- 			.metadata.hide
+	//- 				label Thunder Creek Falls
+	//- 			// img(src='http://www.backpack-newzealand.com/nz-photos/data/22/medium/thunder_creek_falls_2.jpg')
+	//- 		li.slide
+	//- 			.image
+	//- 				img(src='http://files.maravilhas-naturais.webnode.pt/200000128-b22f0b3291/YosemiteFalls.jpg')
+	//- 			.metadata.hide
+	//- 				label Yosemite Falls
+
+	section#videoGallery.gallery
+		.loading
+			#block_1.barlittle
+			#block_2.barlittle
+			#block_3.barlittle
+			#block_4.barlittle
+			#block_5.barlittle
+	
+	#fullScreen.overlay.hide.animated
+		.image
+
+	script(src="/js/fitVids-min.js")
+	script(src="/js/ooCarousel.js")
+	script
+		jQuery(document).ready(function(){
+			//- jQuery("#waterfallsGallery").carousel();
+
+			jQuery("#videoGallery").totalCarousel({
+				youtube: true,
+				height: 300,
+				//- slideMargin: 20,
+				slideWidth: 400
+			});
+		});
