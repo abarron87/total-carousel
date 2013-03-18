@@ -266,7 +266,7 @@ if (!String.prototype.supplant) {
 					slidesHTML += self.slideTemplate.supplant({
 						i: (i+1).toString(),
 						extraClass: "",
-						src: el.src || "",
+						src: el.src+"?time="+new Date().getTime() || "",
 						mediaTitle: el.slideTitle || "",
 						expandedMedia: '{ "large": "" }'
 					});
@@ -278,6 +278,7 @@ if (!String.prototype.supplant) {
 
 			self.carousel.find(".slide img").load(function(){
 				imgCount--;
+				console.log("Img count: "+imgCount);
 				if(imgCount === 0){
 					self.imagesLoaded = true;
 				}				
@@ -296,11 +297,20 @@ if (!String.prototype.supplant) {
 			this.initNav();
 			this.bindEvents();
 
+			//as using load event on images is inconsistent we will show the carousel after 5 seconds if images havent loaded.
+			var seconds = 0,
+				secondsInterval = setInterval(function(){
+					seconds++;
+					if(seconds === 2){
+						clearInterval(secondsInterval);
+					}
+				},1000);
+
 			//wait for images to be fully loaded before displaying them.
 			var interval = setInterval((function(tc){
 				return function(){
 					console.log("checking for images loaded....");
-					if(tc.imagesLoaded){
+					if(tc.imagesLoaded || seconds >= 2){
 						tc.hideLoader();
 						tc.showCarousel();
 						clearInterval(interval);
