@@ -18,25 +18,34 @@ if (!String.prototype.supplant) {
 	var TotalCarousel = function(element,options){
 		this.carousel = $(element);
 		this.defaults = {
-			youtube: false, //whether to pull videos from youtube.
 			height: 300,
 			slideWidth: 440, //width in pixels of each carousel slide. Includes margin left and right.
 			slideMargin: 20,
 			navDisabledClass: "disabled", //class to add to disable clicking of navigation during animation.
-			ytQuery: "arsenal goal compilations" //only for youtube:true. the query to send to YouTube API.
+			ytQuery: "arsenal goal compilations", //only for youtube:true. the query to send to YouTube API.
+			gallery: true, //whether to initialize a TotalGallery instance
+			service: null, //use static content or pull from a particular service from: youtube.
+			autoPlay: false, //slide automatically or not. Default: false
+			buildNavigation: true, //Build and display arrow navigation. Default: true
+			galleryConfig: {
+				selector: ".slideConfig",
+				context: this.carousel
+			}
 		};
 
-		this.settings = $.extend({},this.defaults,options);
+		this.settings = $.extend(true,{},this.defaults,options);
 	};
 
 	TotalCarousel.prototype = {
 		slidePositions: [],
-		slideTemplate: '<li id="slide{i}" class="slide {extraClass}"><div class="image"><img src="{src}" alt="{mediaTitle}"/></div><div class="metadata hide"><label>{mediaTitle}</label><div class="json hide">{expandedMedia}</div></div></li>',
+		slideTemplate: '<li id="slide_{i}" class="slide {extraClass}"><div class="image"><img src="{src}" alt="{mediaTitle}"/></div><div class="metadata hide"><label>{mediaTitle}</label><div class="json hide">{expandedMedia}</div></div></li>',
 		carouselTemplate: '<ol class="animated invisible">{slides}</ol>',
 		playButtonTemplate: '<span class="icon-play play" style="{css}"></span>',
 		expandButtonTemplate: '<span class="icon-expand expand"></span>',
 		videoTemplate: '<iframe width="{width}" height="{height}" src="{src}" frameborder="0" allowfullscreen></iframe>',
 		imageTemplate: '<img src="{src}" width="{width}" height="{height}"/>',
+		fullScreenTemplate: '<li class="{liClass}"><img src="{src}"/></li>',
+		loadingTemplate: '<div class="loading"><div id="block_1" class="barlittle"></div><div id="block_2" class="barlittle"></div><div id="block_3" class="barlittle"></div><div id="block_4" class="barlittle"></div><div id="block_5" class="barlittle"></div></div>',
 
 		/*
 			Main method.
@@ -50,14 +59,16 @@ if (!String.prototype.supplant) {
 			console.log("Visible whole slides: ",galleryWidth/slideWidth);
 			console.log("Slides in view: ",slidesInView);
 
-			if(this.settings.youtube){
+			this.loader = jQuery(this.loadingTemplate).prependTo(this.carousel);
+
+			if(this.settings.service === "youtube"){
 				this.getVideos({
 					amount: slidesInView || 5,
 					query: this.settings.ytQuery,
 					callback: this.buildCarouselDOM
 				});
 			}
-			else if(!this.settings.dynamic){
+			else if(!this.settings.service){
 				var data = jQuery.parseJSON(this.carousel.children(".slideConfig").text());
 				this.buildCarouselDOM(data);
 			}
@@ -195,22 +206,22 @@ if (!String.prototype.supplant) {
 
 						overlay.fitVids();
 						overlay.addClass("fadeInDown").removeClass("hide");
+						this.inFullScreenMode = true;
 					}
 
 					e.preventDefault();
 				},
 				_goFullscreen = function(e){
-					var target = $(e.target || e.srcElement);
+					var target = $(e.target || e.srcElement),
+						self = this,
+						idRegex = /\w+_(\d+)/,
+						slideId = target.parents(".slide").prop("id").match(idRegex)[1];
 
 					if(target.hasClass("expand")){
-						var overlay = $("#fullScreen"),
-							bigImageSrc = $.parseJSON(target.parent().next().children(".json").text()).largeImage;
-
-						overlay.children(".image").html(this.bigImageTemplate.supplant({
-							src: bigImageSrc
-						}));
-
-						overlay.removeClass("hide");
+						if(this.gallery instanceof TotalGallery){
+							this.gallery.showGallery(slideId);
+						};
+						this.inFullScreenMode = true;
 					}
 
 					e.preventDefault();
@@ -221,14 +232,30 @@ if (!String.prototype.supplant) {
 					if(target.is("#fullScreen")){
 						target.children(".image").html("");
 						target.addClass("hide");
+						this.inFullScreenMode = false;
 					}
 
 					e.preventDefault();
+				},
+				_fullScreenNavigate = function(e){
+					if(this.inFullScreenMode){
+						var key = e.which;
+						if(key === 37){
+							console.log("prev pressed");
+						}
+						else if(key === 39){
+							console.log("next pressed");
+						}
+					}
 				};
 
 			$(window).resize(function(){console.log("window resized to "+$(this).width())});
 
-			this.carousel.on("click",".nav",_navClick.bind(this));
+			if(this.settings.buildNavigation){
+				this.carousel.on("click",".nav",_navClick.bind(this));
+			}
+
+			//$("body").on("keyup",_fullScreenNavigate.bind(this));
 			this.carousel.on("click",".slide",_imageClick.bind(this));
 			this.carousel.on("click",".expand",_goFullscreen.bind(this));
 			this.carousel.on("click",".play",_videoClick.bind(this));
@@ -245,7 +272,7 @@ if (!String.prototype.supplant) {
 				slidesHTML = "",
 				imgCount = self.getSlideCount(data);
 
-			if(this.settings.youtube){
+			if(this.settings.service === "youtube"){
 				var videos = data ? data : [],
 					videoContent = this.getVideoContent(videos);
 
@@ -259,16 +286,16 @@ if (!String.prototype.supplant) {
 					});
 				});
 			}
-			else if(!this.settings.dynamic){
+			else{
 				var slides = data && data.images ? data.images : {};
 
 				jQuery.each(slides,function(i,el){
 					slidesHTML += self.slideTemplate.supplant({
 						i: (i+1).toString(),
 						extraClass: "",
-						src: el.src+"?time="+new Date().getTime() || "",
+						src: (el.src) ? el.src+"?time="+new Date().getTime() : "",
 						mediaTitle: el.slideTitle || "",
-						expandedMedia: '{ "large": "" }'
+						expandedMedia: '{ "large": "'+el.bigImageSrc+'" }'
 					});
 				});
 				//Flickr/other service.
@@ -294,7 +321,15 @@ if (!String.prototype.supplant) {
 			this.setState();
 
 			console.log(this.slidePositions);
-			this.initNav();
+
+			if(this.settings.buildNavigation){
+				this.initNav();
+			}
+
+			if(this.settings.gallery){
+				this.gallery = new TotalGallery(this.settings.galleryConfig);
+			}
+
 			this.bindEvents();
 
 			//as using load event on images is inconsistent we will show the carousel after 5 seconds if images havent loaded.
@@ -519,7 +554,7 @@ if (!String.prototype.supplant) {
 			Hide loader
 		*/
 		hideLoader: function(){
-			this.carousel.children(".loading").addClass("hide");
+			this.loader.addClass("hide");
 		},
 
 		// GETTERS
@@ -618,10 +653,10 @@ if (!String.prototype.supplant) {
 		getSlideCount: function(data){
 			var slideCount;
 
-			if(this.settings.youtube || this.settings.flickr){
+			if(this.settings.service === "youtube" || this.settings.service === "flickr"){
 				slideCount = data.length;
 			}
-			else if(!this.settings.dynamic){
+			else{
 				slideCount = data.images.length;
 			}
 
@@ -710,7 +745,7 @@ if (!String.prototype.supplant) {
 				});
 			}
 		}
-	}
+	};
 
 	/*
 		jQuery plugin wrapper and creation of carousel instance.

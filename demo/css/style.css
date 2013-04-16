@@ -117,24 +117,34 @@
 	width: 100%;
 	text-align: center; /* centres it horizontally */
 
-	background: rgba(0,0,0,0.8);
+	background: rgba(0,0,0,0.9);
 }
 
-/* create pseudo-element to display contwtfent container centrally */
+/* create pseudo-element to display content container centrally */
 #fullScreen:before, .slide::before {
 	content: '';
 	display: inline-block;
 	height: 100%;
 	vertical-align: middle;
 }
+
+	#fullScreen .images li {
+		display: none;
+	}
+
+	#fullScreen .images li.active {
+		display: list-item;
+	}
 	
-	#fullScreen .image, .slide .image {
+	#fullScreen .images,
+	#fullScreen .images li.active img,
+	.slide .image {
 		display: inline-block;
 		vertical-align: middle;
 	}
 
-	#fullScreen .image {
-		width: 50%;
+	#fullScreen .images img {
+		/*width: 50%;  REMOVING MIGHT POSSIBLY BREAK VIDEOS */
 	}
 
 /*

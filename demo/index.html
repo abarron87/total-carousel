@@ -13,51 +13,43 @@
         <link rel="stylesheet" href="css/style.css"/>
     </head>
     <body>
-<!--         <span class="icon-arrow-left-2"></span>
-        <h1>Gallery</h1> -->
         <section id="waterfallsGallery" class="gallery">
-            <div class="loading">
-                <div id="block_1" class="barlittle"></div>
-                <div id="block_2" class="barlittle"></div>
-                <div id="block_3" class="barlittle"></div>
-                <div id="block_4" class="barlittle"></div>
-                <div id="block_5" class="barlittle"></div>
-            </div>
             <div class="slideConfig">
                 {
                     "images": [
                         {
-                            "src": "http://i.telegraph.co.uk/multimedia/archive/02104/Thierry_Henry_2104643b.jpg"
+                            "src": "http://i.telegraph.co.uk/multimedia/archive/02104/Thierry_Henry_2104643b.jpg",
+                            "bigImageSrc": "http://i.telegraph.co.uk/multimedia/archive/02104/Thierry_Henry_2104643b.jpg"
                         },
                         {
-                            "src": "http://3.bp.blogspot.com/-l1BOz-7WXus/UPuM6Rt2tCI/AAAAAAAACsU/EJs4C-f5fo8/s1600/Angel+Falls+02.jpg"
+                            "src": "http://3.bp.blogspot.com/-l1BOz-7WXus/UPuM6Rt2tCI/AAAAAAAACsU/EJs4C-f5fo8/s1600/Angel+Falls+02.jpg",
+                            "bigImageSrc": "http://3.bp.blogspot.com/-l1BOz-7WXus/UPuM6Rt2tCI/AAAAAAAACsU/EJs4C-f5fo8/s1600/Angel+Falls+02.jpg"
                         },
                         {
-                            "src": "http://www.sprayview-hotel.com/images/victoria%20falls.jpg"
+                            "src": "http://www.sprayview-hotel.com/images/victoria%20falls.jpg",
+                            "bigImageSrc": "http://www.sprayview-hotel.com/images/victoria%20falls.jpg"
                         },
                         {
-                            "src": "http://www.backpack-newzealand.com/nz-photos/data/22/medium/thunder_creek_falls_2.jpg"
+                            "src": "http://www.backpack-newzealand.com/nz-photos/data/22/medium/thunder_creek_falls_2.jpg",
+                            "bigImageSrc": "http://www.backpack-newzealand.com/nz-photos/data/22/medium/thunder_creek_falls_2.jpg"
                         },
                         {
-                            "src": "http://files.maravilhas-naturais.webnode.pt/200000128-b22f0b3291/YosemiteFalls.jpg"
+                            "src": "http://files.maravilhas-naturais.webnode.pt/200000128-b22f0b3291/YosemiteFalls.jpg",
+                            "bigImageSrc": "http://files.maravilhas-naturais.webnode.pt/200000128-b22f0b3291/YosemiteFalls.jpg"
                         }
                     ]
                 }
             </div>
         </section>
-        <div id="fullScreen" class="overlay hide">
-            <div class="image"></div>
-        </div>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script src="js/fitVids-min.js"></script>
         <script src="js/totalCarousel.js"></script>
+        <script src="js/totalGallery.js"></script>
         <script>
             //Need images to have loaded.
             jQuery(document).ready(function(){
-                jQuery("#waterfallsGallery").totalCarousel({
-                    dynamic: false
-                });
+                jQuery("#waterfallsGallery").totalCarousel();
             });
         </script>
     </body>
